@@ -4,8 +4,8 @@ import colors from "colors";
 
 dotenv.config();
 
-const host = process.env.HOST || "0.0.0.0"; // Allows external access
-const port = Number(process.env.PORT) || 8080;
+const host = process.env.HOST || "127.0.0.1";
+const port = process.env.PORT || 8080;
 const web_server_url = process.env.PUBLIC_URL || `http://${host}:${port}`;
 
 export default function server() {
@@ -24,10 +24,9 @@ export default function server() {
     ],
     redirectSameOrigin: true,
     httpProxyOptions: {
-      xfwd: true, // Forward original headers
-      changeOrigin: true, // Ensure correct origin handling
+      xfwd: false,
     },
-  }).listen(port, host, function () {
+  }).listen(port, Number(host), function () {
     console.log(
       colors.green("Server running on ") + colors.blue(`${web_server_url}`)
     );
