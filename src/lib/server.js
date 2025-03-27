@@ -4,14 +4,16 @@ import colors from "colors";
 
 dotenv.config();
 
-const host = process.env.HOST || "145.223.118.168";
+const host = process.env.HOST || "127.0.0.1";
 const port = process.env.PORT || 8080;
-const web_server_url = process.env.PUBLIC_URL || `https://animoon.me`;
+const web_server_url = process.env.PUBLIC_URL || `http://${host}:${port}`;
 
 export default function server() {
   createServer({
-    originBlacklist: [],
-    originWhitelist: [],
+    originBlacklist: ["*"],
+    originWhitelist: process.env.ALLOWED_ORIGINS
+      ? process.env.ALLOWED_ORIGINS.split(",")
+      : [],
     requireHeader: [],
     removeHeaders: [
       "cookie",
