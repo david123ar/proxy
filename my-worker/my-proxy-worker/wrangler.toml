@@ -1,0 +1,11 @@
+name = "my-worker"
+type = "javascript"
+
+[build]
+command = "npm install"
+
+[env.local]
+usage_model = "bundled"
+
+[dev]
+port = 8787
